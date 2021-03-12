@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="fragments :: head"></div>
+
+<body>
+<div class="login-clean">
+
+    <!-- forma -->
+    <form th:object="${userLoginDto}" name='f' th:action="@{/login}" method="post">
+        <h3 th:text="#{msg.login}">Login</h3>
+
+        <!-- username input -->
+        <div class="form-group">
+            <label th:text="#{msg.username}">Korisničko ime:</label>
+            <input class="form-control" type="text" th:field="*{username}">
+            <!--<span class="validation-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        -->
+        </div>
+
+        <!-- password input -->
+        <div class="form-group">
+            <label th:text="#{msg.password}">lozinka:</label>
+            <input class="form-control" type="password" th:field="*{password}">
+            <span class="validation-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+
+        <!--/*<div class="form-group">
+            <label th:text="#{msg.language}">Jezik:</label>
+            <select id="locales">
+                <option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang.hr}"></option>
+                <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{msg.lang.en}"></option>
+                <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{msg.lang.fr}"></option>
+            </select>
+        </div>*/-->
+
+        <div class="form-group">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            <button class="btn btn-info btn-block" type="submit" th:text="#{msg.login}">Login</button>
+        </div>
+    </form>
+    <a th:href="@{/registration}">Registracija</a>
+</div>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>
