@@ -12,6 +12,8 @@ public class UserRegistrationDto {
     private String password;
     @NotEmpty
     private String passwordConfirm;
+    @NotEmpty
+    private String walletName;
 
     public String getUsername() {
         return username;
@@ -36,4 +38,14 @@ public class UserRegistrationDto {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
+
+    public String getWalletName() {
+        return walletName;
+    }
+
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
+    }
+
+
 }
