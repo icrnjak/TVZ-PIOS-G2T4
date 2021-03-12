@@ -55,4 +55,5 @@ public class UserService {
         authorityRepository.save(authority);
         return userRepository.save(user);
     }
+
 }
