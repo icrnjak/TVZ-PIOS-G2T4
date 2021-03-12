@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="fragments :: head"></div>
+
+<body>
+<div class="login-clean">
+
+    <form name='f' th:action="@{/login}" method="post">
+        <h3 th:text="#{msg.login}">Login</h3>
+
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                <span th:text="#{msg.loginError}">Pogrešno korisničko ime ili lozinka!</span>
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="alert alert-info">
+                <span th:text="#{msg.logoutGood}">Uspješno ste se odjavili.</span>
+            </div>
+        </div>
+
+        <!-- username input -->
+        <div class="form-group">
+            <label th:text="#{msg.username}">Korisničko ime:</label>
+            <input class="form-control" type="text" name="username">
+        </div>
+
+        <!-- password input -->
+        <div class="form-group">
+            <label th:text="#{msg.password}">lozinka:</label>
+            <input class="form-control" type="password" name="password">
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            <button class="btn btn-info btn-block" type="submit" th:text="#{msg.login}">Login</button>
+        </div>
+        <div class="form-group text-center">
+            <p>Nemate račun?</p>
+            <a th:href="@{/registration}">Registrirajte se</a>
+        </div>
+
+    </form>
+</div>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

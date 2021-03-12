@@ -6,3 +6,9 @@ create table if not exists users
     enabled  bit                 not null,
     primary key (id)
 );
+
+create table if not exists authorities
+(
+    username varchar(20) not null,
+    authority varchar(20) not null
+);
