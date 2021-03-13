@@ -30,6 +30,13 @@
 			 	<input class="form-control" type="password" th:field="*{passwordConfirm}">
 				<span class="validation-error" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
 			</div>
+
+			<!-- username input -->
+			<div class="form-group">
+				<label th:text="#{msg.wallet}">Naziv novčanika:</label>
+				<input class="form-control" type="text" th:field="*{walletName}">
+				<span class="validation-error" th:if="${#fields.hasErrors('walletName')}" th:errors="*{walletName}"></span>
+			</div>
 			
 			<!--/*<div class="form-group">
 				<label th:text="#{msg.language}">Jezik:</label>
