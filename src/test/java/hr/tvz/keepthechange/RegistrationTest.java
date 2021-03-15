@@ -1,21 +1,19 @@
 package hr.tvz.keepthechange;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import hr.tvz.keepthechange.dto.UserRegistrationDto;
-import hr.tvz.keepthechange.service.UserService;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Login Test class.
+ * Registration Test class.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,16 +22,27 @@ public class RegistrationTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private static final String TEST_USERNAME = "testUsername";
+    private static final String TEST_PASSWORD = "testPass";
+
     /**
-     * Test for performing login. Accessing index page without login will fail.
+     * Test for performing registration. After successful registration, login is performed to check registration validity.
      * @throws Exception exception
      */
     @Test
-    public void loginTest() throws Exception {
+    public void performRegistrationTest() throws Exception {
         this.mockMvc
-                .perform(get("/registration").with(user("a").password("a").password("a").password("a")
-                        .roles("USER")))
-                .andExpect(status().isOk())
-                .andExpect(view().name("registration"));
+                .perform(post("/registration").with(csrf())
+                .param("username", TEST_USERNAME)
+                .param("password", TEST_PASSWORD)
+                .param("passwordConfirm", TEST_PASSWORD)
+                .param("walletName", "testWallet"))
+                .andExpect(redirectedUrl("/login"));
+
+        this.mockMvc
+                .perform(formLogin().user(TEST_USERNAME).password(TEST_PASSWORD))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/index"))
+                .andExpect(authenticated().withUsername(TEST_USERNAME));
     }
 }
