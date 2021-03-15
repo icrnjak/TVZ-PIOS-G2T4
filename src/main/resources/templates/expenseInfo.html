@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments :: head"></div>
+
+<body>
+<div th:replace="fragments :: navbar"></div>
+	<div class="login-clean">
+		
+		<!-- forma -->
+		<form>
+		
+			<div class="form-group" th:object="${expense}">
+				
+				<p th:text="#{msg.info.confirmation(*{name},*{value} )}"/>
+				<p th:text="#{msg.info.date(*{ExpenseCategory.desc},${expense.convertDate()})}"/>
+				<p th:text="#{msg.info.balance(${wallet.walletName}, ${wallet.balance})}"/>
+
+			</div>
+		</form>
+	</div>
+	<div th:replace="fragments :: scripts"></div>
+</body>
+</html>
