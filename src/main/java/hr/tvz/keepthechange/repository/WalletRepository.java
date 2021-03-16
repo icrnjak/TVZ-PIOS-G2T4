@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 /**
- * Contains methods for performing database queries related to {@link Wallet} entites.
+ * Contains methods for performing database queries related to {@link Wallet} entities.
  */
 @Repository
 public interface WalletRepository extends CrudRepository<Wallet, Long> {

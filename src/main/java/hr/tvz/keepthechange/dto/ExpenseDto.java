@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * Contains data of a form used for user registration.
+ * Contains data of a form used for expenses.
  */
 public class ExpenseDto {
 

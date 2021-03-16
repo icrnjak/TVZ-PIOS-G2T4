@@ -1,5 +1,8 @@
 package hr.tvz.keepthechange.enumeration;
 
+/**
+ * ExpenseCategory enumeration.
+ */
 public enum ExpenseCategory {
 	HEALTH("Zdravlje"),
 	FUN("Zabava"),
@@ -15,7 +18,7 @@ public enum ExpenseCategory {
 		return desc;
 	}
 
-	private ExpenseCategory(String s) {
+	ExpenseCategory(String s) {
 		desc = s;
 	}
 }

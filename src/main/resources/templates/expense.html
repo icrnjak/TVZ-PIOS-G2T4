@@ -8,7 +8,7 @@
 	<div class="login-clean">
 		
 		<!-- forma -->
-		<form method="post" th:action="@{/expense/new}" th:object="${expense}">
+		<form method="post" th:action="@{/expense/new}" th:object="${expenseDto}">
 			<h3 th:text="#{msg.new.expense}">Unos novog troška</h3>
 
 			<!-- id -->
@@ -37,7 +37,7 @@
 			<!-- value input -->
 			<div class="form-group">
 				<label th:text="#{msg.price} + ':'">Iznos</label>
-				<input class="form-control" th:field="${expense.value}" type="number" placeholder="50">
+				<input class="form-control" th:field="${expenseDto.value}" type="number" placeholder="50">
 				<span calss="validation-error" style="color: red;" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></span>
 			</div>
 			

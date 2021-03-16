@@ -6,8 +6,6 @@ import hr.tvz.keepthechange.enumeration.ExpenseType;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -108,10 +106,5 @@ public class Expense {
                 ", walletId=" + walletId +
                 ", expenseType=" + expenseType +
                 '}';
-    }
-
-    public String convertDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
-        return dateFormat.format(date);
     }
 }

@@ -1,11 +1,11 @@
 package hr.tvz.keepthechange.enumeration;
 
 /**
- * ExpenseType enumeration
+ * Roles enumeration
  */
-public enum ExpenseType {
-	EXPENSE("Trošak"),
-	TRANSACTION("Transakcija");
+public enum Roles {
+	ROLE_USER("ROLE_USER"),
+	ROLE_ADMIN("ROLE_ADMIN");
 
 	public String desc;
 
@@ -13,7 +13,7 @@ public enum ExpenseType {
 		return desc;
 	}
 
-	private ExpenseType(String s) {
+	private Roles(String s) {
 		desc = s;
 	}
 }

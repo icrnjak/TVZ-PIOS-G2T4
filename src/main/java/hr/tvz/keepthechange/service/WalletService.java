@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * {@link User} service class.
+ * {@link Wallet} service class.
  */
 @Service
 public class WalletService {
@@ -27,14 +27,17 @@ public class WalletService {
         this.expenseRepository = expenseRepository;
     }
 
+    /**
+     * Calculate wallet balance.
+     * @return balance in string format (frontend compatibility)
+     */
     public WalletDto calculateWallet() {
         final Wallet wallet = walletRepository.findByUsername(userService.getLoggedInUser()).get(0);
         WalletDto walletDto = new WalletDto();
-        BigDecimal sum = new BigDecimal(0);
         List<Expense> expenses = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.EXPENSE);
         List<Expense> transactions = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.TRANSACTION);
 
-        sum = expenses.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
+        BigDecimal sum = expenses.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
         sum = sum.add(transactions.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
 
         walletDto.setWalletName(wallet.getWalletName());

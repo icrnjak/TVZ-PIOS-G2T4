@@ -1,7 +1,7 @@
 package hr.tvz.keepthechange.dto;
 
 /**
- * Contains data of a form used for user registration.
+ * Contains data of a form used for wallet details.
  */
 public class WalletDto {
    public String walletName;

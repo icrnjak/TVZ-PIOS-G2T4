@@ -63,6 +63,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Gets logged in user.
+     * @return username
+     */
     public String getLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails user = (UserDetails) auth.getPrincipal();

@@ -13,7 +13,7 @@
 			<div class="form-group" th:object="${expense}">
 				
 				<p th:text="#{msg.info.confirmation(*{name},*{value} )}"/>
-				<p th:text="#{msg.info.date(*{ExpenseCategory.desc},${expense.convertDate()})}"/>
+				<p th:text="#{msg.info.date(*{ExpenseCategory.desc},${expense.date})}"/>
 				<p th:text="#{msg.info.balance(${wallet.walletName}, ${wallet.balance})}"/>
 
 			</div>
