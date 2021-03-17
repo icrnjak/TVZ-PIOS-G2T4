@@ -7,6 +7,9 @@ import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.repository.AuthorityRepository;
 import hr.tvz.keepthechange.repository.UserRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +64,16 @@ public class UserService {
     }
 
     /**
+     * Gets logged in user.
+     * @return username
+     */
+    public String getLoggedInUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails user = (UserDetails) auth.getPrincipal();
+        return user.getUsername();
+    }
+
+    /**
      * Creates {@link Authority} for {@link User}.
      * @param userDto user data which we are inserting into a database
      */
@@ -77,7 +90,7 @@ public class UserService {
      */
     private void createWallet(UserRegistrationDto userDto) {
         final Wallet wallet = new Wallet();
-        wallet.setName(userDto.getWalletName());
+        wallet.setWalletName(userDto.getWalletName());
         wallet.setCreateDate(LocalDate.now());
         wallet.setUsername(userDto.getUsername());
         walletRepository.save(wallet);

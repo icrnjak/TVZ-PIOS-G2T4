@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Contains methods for performing database queries related to {@link User} entites.
+ * Contains methods for performing database queries related to {@link User} entities.
  */
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {

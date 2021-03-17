@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments :: head"></div>
+
+<body>
+<div th:replace="fragments :: navbar"></div>
+	<div class="login-clean">
+
+		<!-- forma -->
+		<form style="max-width:800px;" th:action="@{/home}" method="post">
+			<div>
+				<div class="text-center">
+					<h2 style="width:50%; margin:0; display: inline;" th:text="#{msg.error.info1}">Ooops! Something went wrong!</h2>
+					<img src="/assets/img/piggy-bank.svg" class="row col-4 mx-auto text-center" style="margin: 50px;">
+					<h3 th:text="#{msg.error.info2}">I'm unable to perform that action.</h3>
+					<h5><a th:href="@{/index}" th:text="#{msg.error.back}">Go back!</a></h5>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+	<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

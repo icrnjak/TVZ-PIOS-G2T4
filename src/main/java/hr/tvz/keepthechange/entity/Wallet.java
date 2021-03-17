@@ -1,8 +1,10 @@
 package hr.tvz.keepthechange.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a database entity from the WALLET table.
@@ -12,13 +14,25 @@ import java.util.Date;
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
-    private String name;
+    @Column(name="name")
+    private String walletName;
 
+    @Column(name="create_date")
     private LocalDate createDate;
 
-    private String Username;
+    @Column(name="username")
+    private String username;
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Expense.class, fetch = FetchType.LAZY)
+    @JoinTable(name="expense", joinColumns = @JoinColumn(name="walletid"))
+    private List<Expense> expenses;
+
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Expense.class, fetch = FetchType.LAZY)
+    @JoinTable(name="expense", joinColumns = @JoinColumn(name="walletid"))
+    private List<Expense> transactions;
 
     public Long getId() {
         return id;
@@ -28,12 +42,12 @@ public class Wallet {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getWalletName() {
+        return walletName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
     }
 
     public LocalDate getCreateDate() {
@@ -45,20 +59,36 @@ public class Wallet {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
+    public List<Expense> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Expense> transactions) {
+        this.transactions = transactions;
     }
 
     @Override
     public String toString() {
         return "Wallet{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + walletName + '\'' +
                 ", createDate=" + createDate +
-                ", Username='" + Username + '\'' +
+                ", Username='" + username + '\'' +
                 '}';
     }
 }
