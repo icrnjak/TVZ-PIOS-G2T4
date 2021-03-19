@@ -36,7 +36,7 @@ public class ExpenseService {
         final Date date = new Date();
         Expense expense = new Expense();
         expense.setDate(date);
-        expense.setExpenseType(ExpenseType.EXPENSE);
+        expense.setExpenseType(expenseDto.getExpenseType());
         expense.setName(expenseDto.getName());
         expense.setValue(expenseDto.getValue());
         expense.setExpenseCategory(expenseDto.getExpenseCategory());
@@ -74,6 +74,15 @@ public class ExpenseService {
     public List<Expense> getAllExpenses(Long walletId) {
 	    return expenseRepository.findByWalletIdAndExpenseType(walletId, ExpenseType.EXPENSE);
 	}
+
+    /**
+     * Get all expenses from user's wallet.
+     * @param walletId {@link Wallet} id.
+     * @return list of {@link Expense} objects
+     */
+    public List<Expense> getAllIncomes(Long walletId) {
+        return expenseRepository.findByWalletIdAndExpenseType(walletId, ExpenseType.INCOME);
+    }
 
 
     /**

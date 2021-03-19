@@ -35,7 +35,7 @@ public class WalletService {
         final Wallet wallet = walletRepository.findByUsername(userService.getLoggedInUser()).get(0);
         WalletDto walletDto = new WalletDto();
         List<Expense> expenses = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.EXPENSE);
-        List<Expense> transactions = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.TRANSACTION);
+        List<Expense> transactions = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.INCOME);
 
         BigDecimal sum = expenses.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
         sum = sum.add(transactions.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));

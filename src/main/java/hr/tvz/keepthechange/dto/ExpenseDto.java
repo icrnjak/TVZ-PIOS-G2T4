@@ -1,6 +1,7 @@
 package hr.tvz.keepthechange.dto;
 
 import hr.tvz.keepthechange.enumeration.ExpenseCategory;
+import hr.tvz.keepthechange.enumeration.ExpenseType;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -31,6 +32,11 @@ public class ExpenseDto {
     @NotNull(message = "{msg.valid.type.notNull}")
     @Column(name="expense_category")
     public ExpenseCategory expenseCategory;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{msg.valid.type.notNull}")
+    @Column(name="expense_type")
+    public ExpenseType expenseType;
 
     public Long getId() {
         return id;
@@ -63,4 +69,13 @@ public class ExpenseDto {
     public void setExpenseCategory(ExpenseCategory expenseCategory) {
         this.expenseCategory = expenseCategory;
     }
+
+    public ExpenseType getExpenseType() {
+        return expenseType;
+    }
+
+    public void setExpenseType(ExpenseType expenseType) {
+        this.expenseType = expenseType;
+    }
+
 }

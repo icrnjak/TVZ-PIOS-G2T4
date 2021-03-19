@@ -2,6 +2,7 @@ package hr.tvz.keepthechange.controller;
 
 import hr.tvz.keepthechange.dto.ExpenseDto;
 import hr.tvz.keepthechange.enumeration.ExpenseCategory;
+import hr.tvz.keepthechange.enumeration.ExpenseType;
 import hr.tvz.keepthechange.service.ExpenseService;
 import hr.tvz.keepthechange.service.WalletService;
 import org.slf4j.Logger;
@@ -42,7 +43,8 @@ public class ExpenseController {
 	public String createExpense(@Validated ExpenseDto expenseDto, Errors errors, Model model) {
 		if(errors.hasErrors()) {
 			model.addAttribute("expenseDto", expenseDto);
-			model.addAttribute("type", ExpenseCategory.values());
+			model.addAttribute("type", ExpenseType.values());
+			model.addAttribute("category", ExpenseCategory.values());
 			LOGGER.info("Form was completed with errors. Redirecting back to form");
 			return "expense";
 		} else {
@@ -62,7 +64,8 @@ public class ExpenseController {
 	@GetMapping("expense/new")
 	public String showExpense(Model model) {
 		model.addAttribute("expenseDto", new ExpenseDto());
-		model.addAttribute("type", ExpenseCategory.values());
+		model.addAttribute("type", ExpenseType.values());
+		model.addAttribute("category", ExpenseCategory.values());
 		return "expense";
 	}
 
@@ -75,8 +78,10 @@ public class ExpenseController {
 	 */
 	@GetMapping("expense/{id}")
 	public String editExpense(Model model, @PathVariable("id") Long id) {
+
 		model.addAttribute("expenseDto", expenseService.getExpensesById(id));
-		model.addAttribute("type", ExpenseCategory.values());
+		model.addAttribute("category", ExpenseCategory.values());
+		model.addAttribute("type", ExpenseType.values());
 		return "expense";
 	}
 

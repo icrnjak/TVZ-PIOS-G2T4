@@ -4,6 +4,7 @@ import hr.tvz.keepthechange.dto.UserRegistrationDto;
 import hr.tvz.keepthechange.entity.Authority;
 import hr.tvz.keepthechange.entity.User;
 import hr.tvz.keepthechange.entity.Wallet;
+import hr.tvz.keepthechange.enumeration.Roles;
 import hr.tvz.keepthechange.repository.AuthorityRepository;
 import hr.tvz.keepthechange.repository.UserRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
@@ -80,7 +81,7 @@ public class UserService {
     private void saveAuthority(UserRegistrationDto userDto) {
         final Authority authority = new Authority();
         authority.setUsername(userDto.getUsername());
-        authority.setAuthority("user");
+        authority.setAuthority(Roles.ROLE_USER);
         authorityRepository.save(authority);
     }
 
