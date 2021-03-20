@@ -15,3 +15,7 @@ body{
 .validation-error{
     color: red;
 }
+
+.nav-item {
+    margin-left: 5px;
+}

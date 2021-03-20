@@ -26,8 +26,39 @@
 
 	</div>
 	<ul class="navbar-nav ml-auto">
-		<li class="nav-item"><a th:href="@{/}"
-			class="btn btn-info btn-block" th:text="#{msg.nav.home}">Početna</a></li>
+		<li class="nav-item">
+			<a th:href="@{/}" class="btn btn-info btn-block"
+			   th:text="#{msg.nav.home}">Početna</a>
+		</li>
+		<li class="nav-item">
+			<a th:href="@{/transaction/new}" class="btn btn-info btn-block"
+			   th:text="#{msg.nav.newTransaction}">Nova transakcija</a>
+		</li>
+		<li class="nav-item" th:if="${false}">
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/allExpenses}"
+			   class="btn btn-info btn-block" th:text="#{msg.nav.allExpenses}">Svi troškovi</a>
+		</li>
+		<li class="nav-item" th:if="${false}">
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/administration}"
+			   class="btn btn-info btn-block" th:text="#{msg.nav.administration}">Administracija</a>
+		</li>
+
+		<li style="padding-left: 10px; padding-top: 5px; padding-right: 10px;" class="nav-item">
+			<span sec:autorize="isAuthenticated()"
+				  th:text="#{msg.nav.signInfo(${#authentication.name})}">Prijavljeni ste kao JUZER</span>
+			<a th:href="@{/logout}" class="btn btn-warning btn-sm" style="width: 35%; display: inline;"
+			   th:text="#{msg.nav.logout}">Odjava</a>
+		</li>
+
+		<li class="nav-item" th:if="${false}">
+			<label for="locales" style="display: none;">Jezik</label>
+			<select id="locales">
+				<option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang.hr}"></option>
+				<option value="en" th:selected="${#locale.language == 'en'}" th:text="#{msg.lang.en}"></option>
+				<option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{msg.lang.fr}"></option>
+				<option value="de" th:selected="${#locale.language == 'de'}" th:text="#{msg.lang.de}"></option>
+			</select>
+		</li>
 	</ul>
 </nav>
 
