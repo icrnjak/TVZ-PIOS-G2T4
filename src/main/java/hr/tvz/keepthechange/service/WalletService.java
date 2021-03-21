@@ -1,11 +1,10 @@
 package hr.tvz.keepthechange.service;
 
 import hr.tvz.keepthechange.dto.WalletDto;
-import hr.tvz.keepthechange.entity.Expense;
-import hr.tvz.keepthechange.entity.User;
+import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.entity.Wallet;
-import hr.tvz.keepthechange.enumeration.ExpenseType;
-import hr.tvz.keepthechange.repository.ExpenseRepository;
+import hr.tvz.keepthechange.enumeration.TransactionType;
+import hr.tvz.keepthechange.repository.TransactionRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,12 @@ import java.util.List;
 public class WalletService {
     private final WalletRepository walletRepository;
     private final UserService userService;
-    private final ExpenseRepository expenseRepository;
+    private final TransactionRepository transactionRepository;
 
-    public WalletService(WalletRepository walletRepository, UserService userService, ExpenseRepository expenseRepository) {
+    public WalletService(WalletRepository walletRepository, UserService userService, TransactionRepository transactionRepository) {
         this.walletRepository = walletRepository;
         this.userService = userService;
-        this.expenseRepository = expenseRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     /**
@@ -34,11 +33,11 @@ public class WalletService {
     public WalletDto calculateWallet() {
         final Wallet wallet = walletRepository.findByUsername(userService.getLoggedInUser()).get(0);
         WalletDto walletDto = new WalletDto();
-        List<Expense> expenses = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.EXPENSE);
-        List<Expense> transactions = expenseRepository.findByWalletIdAndExpenseType(wallet.getId(), ExpenseType.INCOME);
+        List<Transaction> expenses = transactionRepository.findByWalletIdAndTransactionType(wallet.getId(), TransactionType.EXPENSE);
+        List<Transaction> transactions = transactionRepository.findByWalletIdAndTransactionType(wallet.getId(), TransactionType.INCOME);
 
-        BigDecimal sum = expenses.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
-        sum = sum.add(transactions.stream().map(Expense::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
+        BigDecimal sum = expenses.stream().map(Transaction::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
+        sum = sum.add(transactions.stream().map(Transaction::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
 
         walletDto.setWalletName(wallet.getWalletName());
         walletDto.balance = sum.toString();

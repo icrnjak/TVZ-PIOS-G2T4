@@ -10,10 +10,10 @@
 		<!-- forma -->
 		<form>
 		
-			<div class="form-group" th:object="${expense}">
+			<div class="form-group" th:object="${transaction}">
 				
 				<p th:text="#{msg.info.confirmation(*{name},*{value} )}"/>
-				<p th:text="#{msg.info.date(*{ExpenseCategory.desc},${expense.date})}"/>
+				<p th:text="#{msg.info.date(*{TransactionCategory.desc},${transaction.date})}"/>
 				<p th:text="#{msg.info.balance(${wallet.walletName}, ${wallet.balance})}"/>
 
 			</div>

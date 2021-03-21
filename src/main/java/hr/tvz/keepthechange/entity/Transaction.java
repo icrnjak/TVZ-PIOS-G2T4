@@ -1,7 +1,7 @@
 package hr.tvz.keepthechange.entity;
 
-import hr.tvz.keepthechange.enumeration.ExpenseCategory;
-import hr.tvz.keepthechange.enumeration.ExpenseType;
+import hr.tvz.keepthechange.enumeration.TransactionCategory;
+import hr.tvz.keepthechange.enumeration.TransactionType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Represents a database entity from the EXPENSE table.
+ * Represents a database entity from the TRANSACTION table.
  */
 @Entity
-@Table(name = "expense")
-public class Expense {
+@Table(name = "transaction")
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +25,8 @@ public class Expense {
     private BigDecimal value;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="expense_category")
-    private ExpenseCategory expenseCategory;
+    @Column(name="transaction_category")
+    private TransactionCategory transactionCategory;
 
     @Column(name="create_date")
     @Temporal(TemporalType.DATE)
@@ -35,9 +35,9 @@ public class Expense {
     @Column(name="wallet_id")
     private Long walletId;
 
-    @Column(name="expense_type")
+    @Column(name="transaction_type")
     @Enumerated(EnumType.STRING)
-    private ExpenseType expenseType;
+    private TransactionType transactionType;
 
     public Long getId() {
         return id;
@@ -63,12 +63,12 @@ public class Expense {
         this.value = value;
     }
 
-    public ExpenseCategory getExpenseCategory() {
-        return expenseCategory;
+    public TransactionCategory getTransactionCategory() {
+        return transactionCategory;
     }
 
-    public void setExpenseCategory(ExpenseCategory expenseCategory) {
-        this.expenseCategory = expenseCategory;
+    public void setTransactionCategory(TransactionCategory transactionCategory) {
+        this.transactionCategory = transactionCategory;
     }
 
     public Date getDate() {
@@ -87,24 +87,24 @@ public class Expense {
         this.walletId = walletId;
     }
 
-    public ExpenseType getExpenseType() {
-        return expenseType;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
-    public void setExpenseType(ExpenseType type) {
-        this.expenseType = type;
+    public void setTransactionType(TransactionType type) {
+        this.transactionType = type;
     }
 
     @Override
     public String toString() {
-        return "Expense{" +
+        return "Transaction{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", value=" + value +
-                ", expenseCategory=" + expenseCategory +
+                ", transactionCategory=" + transactionCategory +
                 ", date=" + date +
                 ", walletId=" + walletId +
-                ", expenseType=" + expenseType +
+                ", transactionType=" + transactionType +
                 '}';
     }
 }
