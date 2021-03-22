@@ -1,11 +1,11 @@
 package hr.tvz.keepthechange.enumeration;
 
 /**
- * ExpenseType enumeration
+ * TransactionType enumeration
  */
-public enum ExpenseType {
+public enum TransactionType {
 	EXPENSE("Trošak"),
-	TRANSACTION("Transakcija");
+	INCOME("Uplata");
 
 	public String desc;
 
@@ -13,7 +13,7 @@ public enum ExpenseType {
 		return desc;
 	}
 
-	private ExpenseType(String s) {
+	private TransactionType(String s) {
 		desc = s;
 	}
 }

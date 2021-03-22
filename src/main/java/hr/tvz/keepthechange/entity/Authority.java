@@ -1,5 +1,7 @@
 package hr.tvz.keepthechange.entity;
 
+import hr.tvz.keepthechange.enumeration.Roles;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -26,7 +28,7 @@ public class Authority {
         return authority;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setAuthority(Roles authority) {
+        this.authority = authority.toString();
     }
 }

@@ -1,6 +1,7 @@
 package hr.tvz.keepthechange.dto;
 
-import hr.tvz.keepthechange.enumeration.ExpenseCategory;
+import hr.tvz.keepthechange.enumeration.TransactionCategory;
+import hr.tvz.keepthechange.enumeration.TransactionType;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -12,9 +13,9 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * Contains data of a form used for expenses.
+ * Contains data of a form used for transactions.
  */
-public class ExpenseDto {
+public class TransactionDto {
 
     public Long id;
 
@@ -29,8 +30,13 @@ public class ExpenseDto {
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "{msg.valid.type.notNull}")
-    @Column(name="expense_category")
-    public ExpenseCategory expenseCategory;
+    @Column(name="transaction_category")
+    public TransactionCategory transactionCategory;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{msg.valid.type.notNull}")
+    @Column(name="transaction_type")
+    public TransactionType transactionType;
 
     public Long getId() {
         return id;
@@ -56,11 +62,20 @@ public class ExpenseDto {
         this.value = value;
     }
 
-    public ExpenseCategory getExpenseCategory() {
-        return expenseCategory;
+    public TransactionCategory getTransactionCategory() {
+        return transactionCategory;
     }
 
-    public void setExpenseCategory(ExpenseCategory expenseCategory) {
-        this.expenseCategory = expenseCategory;
+    public void setTransactionCategory(TransactionCategory transactionCategory) {
+        this.transactionCategory = transactionCategory;
     }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
 }

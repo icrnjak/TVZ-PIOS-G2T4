@@ -26,13 +26,9 @@ public class Wallet {
     @Column(name="username")
     private String username;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Expense.class, fetch = FetchType.LAZY)
-    @JoinTable(name="expense", joinColumns = @JoinColumn(name="walletid"))
-    private List<Expense> expenses;
-
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Expense.class, fetch = FetchType.LAZY)
-    @JoinTable(name="expense", joinColumns = @JoinColumn(name="walletid"))
-    private List<Expense> transactions;
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Transaction.class, fetch = FetchType.LAZY)
+    @JoinTable(name="transaction", joinColumns = @JoinColumn(name="walletid"))
+    private List<Transaction> transactions;
 
     public Long getId() {
         return id;
@@ -66,19 +62,11 @@ public class Wallet {
         this.username = username;
     }
 
-    public List<Expense> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public List<Expense> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Expense> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
