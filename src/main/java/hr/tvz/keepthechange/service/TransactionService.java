@@ -92,4 +92,8 @@ public class TransactionService {
     private Wallet getWallet() {
         return walletRepository.findByUsername(userService.getLoggedInUser()).get(0);
     }
+
+    public List<Transaction> getAllByWalletIdOrderByDateDesc(Long walletId) {
+        return transactionRepository.findByWalletIdOrderByDateDesc(walletId);
+    }
 }

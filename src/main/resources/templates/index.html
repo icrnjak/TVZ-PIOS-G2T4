@@ -8,8 +8,38 @@
 
 <body>
 <div th:replace="fragments :: navbar"></div>
-<main>
-    Ovo je home screen!
+<main class="login-clean">
+    <form style="max-width:800px;" th:action="@{/}" method="post">
+        <table style="width:100%;">
+            <thead>
+            <tr>
+                <th th:text="#{msg.search.name}"> Naziv</th>
+                <th th:text="#{msg.price}"> Iznos</th>
+                <th th:text="#{msg.search.type}"> Vrsta</th>
+                <th th:text="#{msg.search.date}"> Datum</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${transactions.isEmpty()}">
+                <td colspan="2" th:text="#{msg.noTransactions}"> Nema transakcija</td>
+            </tr>
+            <tr th:each="t : ${transactions}"
+                th:with="isExpense = ${t.transactionType.equals(T(hr.tvz.keepthechange.enumeration.TransactionType).EXPENSE)}"
+                th:classappend="${isExpense} ? red : green">
+                <td style="padding: 5px;"><span th:text="${t.name}"> Naziv </span></td>
+                <td><span th:text="${isExpense} ? '-' + ${t.value} : ${t.value}"> Iznos </span></td>
+                <td><span th:text="${t.transactionCategory.desc}"> Vrsta </span></td>
+                <td><span th:text="${t.date}"> Datum </span></td>
+                <td style="padding: 5px;"><a href="#" class="btn btn-info btn-block"><i class="fa fa-pencil"></i></a>
+                </td>
+                <td style="padding: 5px;"><a href="#" class="btn btn-danger btn-block"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </main>
 <div th:replace="fragments :: scripts"></div>
 </body>

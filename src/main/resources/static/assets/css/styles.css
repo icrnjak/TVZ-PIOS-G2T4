@@ -19,3 +19,11 @@ body{
 .nav-item {
     margin-left: 5px;
 }
+
+.red{
+    background-color:#ff010133;
+}
+
+.green{
+    background-color: #4fbf4f33;
+}
