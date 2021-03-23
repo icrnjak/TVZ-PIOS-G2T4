@@ -38,7 +38,7 @@
                 <td style="padding: 5px;"><span th:text="${t.name}"> Naziv </span></td>
                 <td><span th:text="${isExpense} ? '-' + ${t.value} : ${t.value}"> Iznos </span></td>
                 <td><span th:text="${t.transactionCategory.desc}"> Vrsta </span></td>
-                <td><span th:text="${t.date}"> Datum </span></td>
+                <td><span th:text="${{t.date}}"> Datum </span></td>
                 <td style="padding: 5px;"><a href="#" class="btn btn-info btn-block"><i class="fa fa-pencil"></i></a>
                 </td>
                 <td style="padding: 5px;"><a href="#" class="btn btn-danger btn-block"><i class="fa fa-trash"></i></a>
