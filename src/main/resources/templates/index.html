@@ -9,12 +9,38 @@
 <body>
 <div th:replace="fragments :: navbar"></div>
 <main class="login-clean">
-    <form style="max-width:800px;" th:action="@{/}" method="post">
+    <form style="max-width:800px;" th:action="@{/}">
         <div>
             <div>
                 <h2 style="width:50%; margin:0; display: inline;" th:text="#{msg.index.myWallet}">Moj račun</h2>
             </div>
-            <span th:text="#{msg.index.balance}">Stanje: </span> <span th:text="${walletStatus.balance}" th:classappend="${walletStatus.balance.contains('-')} ? bad : good"></span>
+            <span th:text="#{msg.index.balance}">Stanje: </span> <span th:text="${walletStatus.balance}"
+                                                                       th:classappend="${walletStatus.balance.contains('-')} ? bad : good"></span>
+        </div>
+
+        <div>
+            <div class="input-group md-form form-sm form-2 pl-0" style="margin: 15px 0;">
+                <select class="form-control" id="izbor" onchange="zamjeni()" style="width: 100%;">
+                    <option value="name" th:text="#{msg.search.name}">Naziv</option>
+                    <option value="category" th:text="#{msg.search.type}">Vrsta</option>
+                    <option value="date" th:text="#{msg.search.date}">Datum</option>
+                </select>
+                <select class="form-control lime-border" id="category" name="category" disabled hidden required>
+                    <option value="" th:text="#{msg.list.default}">---Odaberite vrijednost---</option>
+                    <option th:each="category : ${transactionCategories}"
+                            th:value="${category}"
+                            th:text="${category.desc}"></option>
+                </select>
+                <input class="form-control lime-border" type="date" name="date" id="date"
+                       data-date-format="YYYY-MM-DD" disabled hidden required>
+                <input class="form-control lime-border" type="text" th:placeholder="#{msg.index.searchTransactions}"
+                       name="name" id="name">
+                <div class="input-group-append">
+                    <button class="input-group-text btn lime lighten-2" id="basic-text1" type="submit">
+                        <i class="fa fa-search text-grey"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <table style="width:100%;">
@@ -49,5 +75,21 @@
     </form>
 </main>
 <div th:replace="fragments :: scripts"></div>
+<script type="text/javascript">
+    function zamjeni() {
+        debugger;
+        const selected = document.getElementById("izbor").value;
+        ["category", "name", "date"].map(id => document.getElementById(id))
+        .forEach(element => {
+            if (element.id === selected) {
+                element.removeAttribute("disabled");
+                element.removeAttribute("hidden");
+            } else {
+                element.setAttribute("disabled", true);
+                element.setAttribute("hidden", true);
+            }
+        });
+    }
+</script>
 </body>
 </html>

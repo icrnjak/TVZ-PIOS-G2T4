@@ -15,8 +15,8 @@ import java.util.List;
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
 	ArrayList<Transaction> findByWalletIdAndTransactionType(Long id, TransactionType type);
-	Iterable<Transaction> findByWalletIdAndNameIgnoreCase(Long id, String name);
-	Iterable<Transaction> findByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory);
 	List<Transaction> findByWalletIdOrderByDateDesc(Long id);
-	Iterable<Transaction> findByWalletIdAndDate(Long id, Date date);
+	List<Transaction> findByWalletIdAndNameContainsIgnoreCase(Long id, String name);
+	List<Transaction> findByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory);
+	List<Transaction> findByWalletIdAndDate(Long id, Date date);
 }

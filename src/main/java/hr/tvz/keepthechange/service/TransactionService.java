@@ -3,6 +3,7 @@ package hr.tvz.keepthechange.service;
 import hr.tvz.keepthechange.dto.TransactionDto;
 import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.entity.Wallet;
+import hr.tvz.keepthechange.enumeration.TransactionCategory;
 import hr.tvz.keepthechange.enumeration.TransactionType;
 import hr.tvz.keepthechange.repository.TransactionRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
@@ -95,5 +96,17 @@ public class TransactionService {
 
     public List<Transaction> getAllByWalletIdOrderByDateDesc(Long walletId) {
         return transactionRepository.findByWalletIdOrderByDateDesc(walletId);
+    }
+
+    public List<Transaction> getAllByWalletIdAndNameContainsIgnoreCase(Long id, String name) {
+        return transactionRepository.findByWalletIdAndNameContainsIgnoreCase(id, name);
+    }
+
+    public List<Transaction> getAllByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory) {
+        return transactionRepository.findByWalletIdAndTransactionCategory(id, transactionCategory);
+    }
+
+    public List<Transaction> getAllByWalletIdAndDate(Long id, Date date) {
+        return transactionRepository.findByWalletIdAndDate(id, date);
     }
 }
