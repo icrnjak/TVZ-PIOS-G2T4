@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Contains methods for performing database queries related to {@link Transaction} entities.
@@ -14,8 +15,8 @@ import java.util.Date;
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
 	ArrayList<Transaction> findByWalletIdAndTransactionType(Long id, TransactionType type);
-	Iterable<Transaction> findByWalletIdAndNameIgnoreCase(Long id, String name);
-	Iterable<Transaction> findByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory);
-	Iterable<Transaction> findByWalletId(Long id);
-	Iterable<Transaction> findByWalletIdAndDate(Long id, Date date);
+	List<Transaction> findByWalletIdOrderByDateDesc(Long id);
+	List<Transaction> findByWalletIdAndNameContainsIgnoreCase(Long id, String name);
+	List<Transaction> findByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory);
+	List<Transaction> findByWalletIdAndDate(Long id, Date date);
 }

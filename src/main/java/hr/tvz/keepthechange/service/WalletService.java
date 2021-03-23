@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * {@link Wallet} service class.
@@ -43,6 +44,10 @@ public class WalletService {
         walletDto.balance = sum.toString();
 
         return walletDto;
+    }
+
+    public Optional<Wallet> findFirstByUsername(String username) {
+        return walletRepository.findFirstByUsername(username);
     }
 
 }
