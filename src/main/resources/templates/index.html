@@ -10,6 +10,13 @@
 <div th:replace="fragments :: navbar"></div>
 <main class="login-clean">
     <form style="max-width:800px;" th:action="@{/}" method="post">
+        <div>
+            <div>
+                <h2 style="width:50%; margin:0; display: inline;" th:text="#{msg.index.myWallet}">Moj račun</h2>
+            </div>
+            <span th:text="#{msg.index.balance}">Stanje: </span> <span th:text="${walletStatus.balance}" th:classappend="${walletStatus.balance.contains('-')} ? bad : good"></span>
+        </div>
+
         <table style="width:100%;">
             <thead>
             <tr>
@@ -23,7 +30,7 @@
             </thead>
             <tbody>
             <tr th:if="${transactions.isEmpty()}">
-                <td colspan="2" th:text="#{msg.noTransactions}"> Nema transakcija</td>
+                <td colspan="2" th:text="#{msg.index.noTransactions}"> Nema transakcija</td>
             </tr>
             <tr th:each="t : ${transactions}"
                 th:with="isExpense = ${t.transactionType.equals(T(hr.tvz.keepthechange.enumeration.TransactionType).EXPENSE)}"

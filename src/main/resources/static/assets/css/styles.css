@@ -27,3 +27,11 @@ body{
 .green{
     background-color: #4fbf4f33;
 }
+
+.good{
+    color:green;
+}
+
+.bad{
+    color:red;
+}
