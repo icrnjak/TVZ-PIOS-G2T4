@@ -67,6 +67,7 @@ public class IndexController {
         Wallet wallet = walletService.findFirstByUsername(principal.getName()).orElseThrow();
         List<Transaction> transactions = transactionService.getAllByWalletIdAndNameContainsIgnoreCase(wallet.getId(), name);
         model.addAttribute(TRANSACTIONS, transactions);
+        model.addAttribute("FilterEnabled", true);
         return VIEW_NAME;
     }
 
@@ -78,6 +79,7 @@ public class IndexController {
         Wallet wallet = walletService.findFirstByUsername(principal.getName()).orElseThrow();
         List<Transaction> transactions = transactionService.getAllByWalletIdAndTransactionCategory(wallet.getId(), category);
         model.addAttribute(TRANSACTIONS, transactions);
+        model.addAttribute("FilterEnabled", true);
         return VIEW_NAME;
     }
 
@@ -89,6 +91,7 @@ public class IndexController {
         Wallet wallet = walletService.findFirstByUsername(principal.getName()).orElseThrow();
         List<Transaction> transactions = transactionService.getAllByWalletIdAndDate(wallet.getId(), date);
         model.addAttribute(TRANSACTIONS, transactions);
+        model.addAttribute("FilterEnabled", true);
         return VIEW_NAME;
     }
 }
