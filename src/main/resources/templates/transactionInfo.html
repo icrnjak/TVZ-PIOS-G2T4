@@ -17,6 +17,9 @@
 				<p th:text="#{msg.info.balance(${wallet.walletName}, ${wallet.balance})}"/>
 
 			</div>
+			<a href="/index"
+			   class="btn btn-info btn-block" th:text=#{msg.info.return}>
+			</a>
 		</form>
 	</div>
 	<div th:replace="fragments :: scripts"></div>
