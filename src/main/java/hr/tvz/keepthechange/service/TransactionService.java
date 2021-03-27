@@ -9,6 +9,9 @@ import hr.tvz.keepthechange.repository.TransactionRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.time.YearMonth;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -108,5 +111,17 @@ public class TransactionService {
 
     public List<Transaction> getAllByWalletIdAndDate(Long id, Date date) {
         return transactionRepository.findByWalletIdAndDate(id, date);
+    }
+
+    public List<Transaction> getAllByYearMonth(YearMonth yearMonth) {
+        Date from = Date.from(yearMonth.atDay(1)
+                .atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+        Date to = Date.from(yearMonth.atEndOfMonth()
+                .atTime(LocalTime.MAX)
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+        return transactionRepository.findByDateBetween(from, to);
     }
 }
