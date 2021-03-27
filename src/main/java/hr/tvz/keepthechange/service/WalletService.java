@@ -40,6 +40,7 @@ public class WalletService {
         BigDecimal sum = expenses.stream().map(Transaction::getValue).reduce(BigDecimal.ZERO, BigDecimal::add).multiply(new BigDecimal(-1));
         sum = sum.add(transactions.stream().map(Transaction::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
 
+        walletDto.setId(wallet.getId());
         walletDto.setWalletName(wallet.getWalletName());
         walletDto.balance = sum.toString();
 

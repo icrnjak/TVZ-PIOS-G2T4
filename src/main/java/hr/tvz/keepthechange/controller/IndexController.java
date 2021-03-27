@@ -1,8 +1,10 @@
 package hr.tvz.keepthechange.controller;
 
+import hr.tvz.keepthechange.dto.WalletDto;
 import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.enumeration.TransactionCategory;
+import hr.tvz.keepthechange.service.MonthlyReportService;
 import hr.tvz.keepthechange.service.TransactionService;
 import hr.tvz.keepthechange.service.WalletService;
 import org.slf4j.Logger;
@@ -32,10 +34,14 @@ public class IndexController {
     private static final String TRANSACTIONS = "transactions";
     private final WalletService walletService;
     private final TransactionService transactionService;
+    private final MonthlyReportService monthlyReportService;
 
-    public IndexController(WalletService walletService, TransactionService transactionService) {
+    public IndexController(WalletService walletService,
+                           TransactionService transactionService,
+                           MonthlyReportService monthlyReportService) {
         this.walletService = walletService;
         this.transactionService = transactionService;
+        this.monthlyReportService = monthlyReportService;
     }
 
     @InitBinder
@@ -45,9 +51,11 @@ public class IndexController {
 
     @ModelAttribute
     public void addModelAttributes(Model model) {
-        LOGGER.debug("Adding wallet status and transaction categories to model");
-        model.addAttribute("walletStatus", walletService.calculateWallet());
+        LOGGER.debug("Adding wallet status, wallet existence and transaction categories to model");
+        WalletDto walletDto = walletService.calculateWallet();
+        model.addAttribute("walletStatus", walletDto);
         model.addAttribute("transactionCategories", TransactionCategory.values());
+        model.addAttribute("monthlyReportExists", monthlyReportService.exists(walletDto.getId()));
     }
 
     @GetMapping
