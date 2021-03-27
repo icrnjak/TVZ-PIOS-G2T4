@@ -18,9 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.service.TransactionService;
 
+
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ExpensesTest {
+public class TransactionTest {
 
 	@Autowired
 	private MockMvc mockMvc;
