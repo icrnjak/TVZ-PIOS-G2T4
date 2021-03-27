@@ -21,14 +21,14 @@ create table if not exists wallet(
     primary key(id)
 );
 
-create table if not exists expense(
+create table if not exists transaction(
     id long auto_increment not null,
     name varchar(255) not null,
     price decimal(6,2) not null,
-    expense_category varchar(20) not null,
+    transaction_category varchar(20) not null,
     create_date date not null,
     wallet_id long not null,
-    expense_type varchar(20) not null,
+    transaction_type varchar(20) not null,
     primary key(id),
     foreign key(wallet_id) references wallet(id)
 );
