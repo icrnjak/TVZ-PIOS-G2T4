@@ -8,5 +8,5 @@ package hr.tvz.keepthechange;
  * </p>
  */
 public final class QuartzTriggers {
-    public static final String MONTHLY_REPORT = "0/30 * * * * ? *";
+    public static final String MONTHLY_REPORT = "0 0 0 1 * ? *";
 }
