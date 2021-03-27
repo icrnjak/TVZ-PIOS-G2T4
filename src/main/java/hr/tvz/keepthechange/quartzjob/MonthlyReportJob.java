@@ -42,7 +42,7 @@ public class MonthlyReportJob extends QuartzJobBean {
                 .parallelStream()
                 .collect(Collectors.collectingAndThen(Collectors.groupingByConcurrent(Transaction::getWalletId, Collectors.toList()), Map::entrySet))
                 .parallelStream()
-                .map(entry -> monthlyReportService.generate(previousMonth, entry.getKey(), entry.getValue()))
+                .map(entry -> monthlyReportService.generate(entry.getKey(), entry.getValue()))
                 .filter(b -> b)
                 .count();
         LOGGER.info("Generated {} monthly reports for month {}", generatedFilesCount, previousMonth);

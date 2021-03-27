@@ -43,6 +43,10 @@
             </div>
         </div>
 
+        <div th:if="${monthlyReportExists}">
+            <a th:href="@{/monthlyReport}" th:text="#{msg.index.monthlyReportDownload}">Preuzmi izvještaj</a>
+        </div>
+
         <table style="width:100%;">
             <thead>
             <tr>

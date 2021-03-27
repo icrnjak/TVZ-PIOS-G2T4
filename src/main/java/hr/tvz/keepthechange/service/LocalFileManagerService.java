@@ -2,6 +2,8 @@ package hr.tvz.keepthechange.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,5 +30,17 @@ public class LocalFileManagerService implements FileManagerService {
         LOGGER.info("Writing {}B file to path {}", bytes.length, fullPath);
         Files.write(fullPath, bytes);
         return true;
+    }
+
+    @Override
+    public boolean exists(String pathString) {
+        Path fullPath = BASE_PATH.resolve(Path.of(pathString));
+        return Files.exists(fullPath);
+    }
+
+    @Override
+    public Resource get(String pathString) {
+        Path fullPath = BASE_PATH.resolve(Path.of(pathString));
+        return new FileSystemResource(fullPath);
     }
 }
