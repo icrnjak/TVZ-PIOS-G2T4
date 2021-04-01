@@ -9,4 +9,5 @@ package hr.tvz.keepthechange;
  */
 public final class QuartzTriggers {
     public static final String MONTHLY_REPORT = "0 0 0 1 * ? *";
+    public static final String DELETE_MONTHLY_REPORT = "0 0 2 1 * ? *";
 }

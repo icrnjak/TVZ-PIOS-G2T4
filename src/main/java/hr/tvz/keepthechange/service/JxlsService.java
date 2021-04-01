@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 
 /**
  * Contains methods used to transform JXLS templates.
@@ -28,11 +29,15 @@ public class JxlsService {
      * @param is      template input stream
      * @param os      result output stream
      * @param context evaluation context with a variable map
-     * @throws IOException if an error occurs during transformation
+     * @throws UncheckedIOException if an error occurs during transformation
      */
-    public void transform(InputStream is, OutputStream os, Context context) throws IOException {
+    public void transform(InputStream is, OutputStream os, Context context) {
         PoiTransformer transformer = createConfiguredPoiTransformer(is, os);
-        JxlsHelper.getInstance().processTemplate(context, transformer);
+        try {
+            JxlsHelper.getInstance().processTemplate(context, transformer);
+        } catch (IOException ioException) {
+            throw new UncheckedIOException(ioException);
+        }
     }
 
     /**
