@@ -9,6 +9,7 @@ import hr.tvz.keepthechange.repository.TransactionRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -123,5 +124,20 @@ public class TransactionService {
                 .atZone(ZoneId.systemDefault())
                 .toInstant());
         return transactionRepository.findByDateBetween(from, to);
+    }
+
+    /**
+     * Calculates the total balance of given {@link Transaction}s by adding them if they
+     * are of type {@link TransactionType#INCOME} and substracting if they are of type {@link TransactionType#EXPENSE}.
+     *
+     * @param transactions list of transactions for which balance should be calculated
+     * @return total balance
+     */
+    public BigDecimal calculateBalance(List<Transaction> transactions) {
+        return transactions.stream()
+                .map(t -> t.getTransactionType().equals(TransactionType.EXPENSE)
+                        ? t.getValue().multiply(BigDecimal.valueOf(-1L))
+                        : t.getValue())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

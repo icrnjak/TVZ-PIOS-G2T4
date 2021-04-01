@@ -51,4 +51,8 @@ public class WalletService {
         return walletRepository.findFirstByUsername(username);
     }
 
+    public List<Wallet> findAllOrderByWalletName(){
+        return walletRepository.findAllByOrderByWalletName();
+    }
+
 }

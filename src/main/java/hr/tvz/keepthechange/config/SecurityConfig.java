@@ -34,19 +34,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http
                 .authorizeRequests()
-                    .antMatchers("/login", "/assets/**", "/h2-console/**", "/error").permitAll()
-                    .antMatchers("/index","/", "/transaction/**").authenticated()
-                    .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/index", true)
-                    .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login?logout")
-                    .clearAuthentication(true)
-                    .deleteCookies("JSESSIONID")
-                    .invalidateHttpSession(true);
+                .mvcMatchers("/login", "/assets/**", "/h2-console/**", "/error").permitAll()
+                .mvcMatchers("/allExpenses").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated();
+        http
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/index", true);
+        http
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);
     }
 
     /**

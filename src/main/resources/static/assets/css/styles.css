@@ -70,3 +70,9 @@ thead tr{
 tbody tr{
     border-bottom: 1px solid black;
 }
+
+.all-expenses-report {
+    box-shadow: 0 0 20px -8px gray;
+    padding: 10px;
+    margin-bottom: 30px;
+}
