@@ -34,7 +34,7 @@
 			<a th:href="@{/transaction/new}" class="btn btn-info btn-block"
 			   th:text="#{msg.nav.newTransaction}">Nova transakcija</a>
 		</li>
-		<li class="nav-item" th:if="${false}">
+		<li class="nav-item">
 			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/allExpenses}"
 			   class="btn btn-info btn-block" th:text="#{msg.nav.allExpenses}">Svi troškovi</a>
 		</li>

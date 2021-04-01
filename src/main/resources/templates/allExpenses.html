@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments :: head"></div>
+
+<body>
+<div th:replace="fragments :: navbar"></div>
+<main class="login-clean">
+
+    <!-- forma -->
+    <form style="width:800px; max-width:800px;">
+        <div th:each="wallet : ${wallets}" class="all-expenses-report">
+
+            <h2 th:text="#{msg.all.wallet} + ' ' + ${wallet.walletName}">Novčanik</h2>
+            <table style="width:100%; margin-bottom: 25px;">
+                <thead>
+                <tr>
+                    <th th:text="#{msg.search.name}"> Naziv</th>
+                    <th th:text="#{msg.search.date}"> Datum</th>
+                    <th th:text="#{msg.owner}"> Vlasnik</th>
+                    <th th:text="#{msg.id}"> ID</th>
+                    <th th:text="#{msg.all.balance}"> Stanje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${wallets.empty}">
+                    <td colspan="6" style="text-align: center" th:text="#{msg.noWallets}"> Nema troškova</td>
+                </tr>
+
+                <tr>
+                    <td><span th:text="${wallet.walletName}"> Naziv </span></td>
+                    <td><span th:text="${{wallet.createDate}}"> Datum </span></td>
+                    <td><span th:text="${wallet.username}"> Vlasnik </span></td>
+                    <td><span th:text="${wallet.id}"> ID </span></td>
+                    <td><span th:with="balance = ${@transactionService.calculateBalance(wallet.getTransactions())}"
+                              th:class="${balance.compareTo(0) < 0 ? 'bad' : (balance.compareTo(0) > 0 ? 'good' : '')}"
+                              th:text="${balance}">Iznos</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <h5 th:text="#{msg.all.transactions}">Transakcije</h5>
+            <table style="width:100%;">
+                <thead>
+                <tr>
+                    <th th:text="#{msg.search.name}"> Naziv</th>
+                    <th th:text="#{msg.price}"> Iznos</th>
+                    <th th:text="#{msg.search.type}"> Vrsta</th>
+                    <th th:text="#{msg.search.date}"> Datum</th>
+                    <th th:text="#{msg.walletId}"> Id novčanika</th>
+                    <th th:text="#{msg.transactionType}"> Vrsta transakcije</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${wallet.getTransactions().empty}">
+                    <td colspan="6" style="text-align: center" th:text="#{msg.index.noTransactions}"> Nema troškova</td>
+                </tr>
+                <tr th:each="t : ${wallet.getTransactions()}"
+                    th:with="isExpense = ${t.transactionType.equals(T(hr.tvz.keepthechange.enumeration.TransactionType).EXPENSE)}"
+                    th:classappend="${isExpense} ? red : green">
+                    <td><span th:text="${t.name}"> Naziv </span></td>
+                    <td><span th:text="${(isExpense ? '-' : '') + t.value}"> Iznos </span></td>
+                    <td><span th:text="${t.transactionCategory.desc}"> Kategorija </span></td>
+                    <td><span th:text="${{t.date}}"> Datum </span></td>
+                    <td><span th:text="${t.walletId}"> Id novčanika </span></td>
+                    <td><span th:text="${t.transactionType.desc}"> Vrsta </span></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+
+</main>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>
