@@ -2,7 +2,8 @@ package hr.tvz.keepthechange.service;
 
 import org.springframework.core.io.Resource;
 
-import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.stream.Stream;
 
 /**
  * Contains SPI for working with file resources used in application.
@@ -15,9 +16,9 @@ public interface FileManagerService {
      * @param pathString relative path where the file is stored
      * @param bytes      file bytes
      * @return {@code true} if a file was saved, {@code false} otherwise
-     * @throws IOException if something goes wrong with saving the file
+     * @throws UncheckedIOException if something goes wrong with saving the file
      */
-    boolean saveFile(String pathString, byte[] bytes) throws IOException;
+    boolean saveFile(String pathString, byte[] bytes);
 
     /**
      * Checks if a file exists.
@@ -35,4 +36,20 @@ public interface FileManagerService {
      * @return {@link Resource} containing the file
      */
     Resource get(String pathString);
+
+    /**
+     * Deletes a file or directory at a given path.
+     *
+     * @param pathString relative path of the file or directory
+     * @return {@code true} if it was deleted, {@code false} otherwise
+     */
+    boolean delete(String pathString);
+
+    /**
+     * Returns a stream consisting of paths of files inside a given path and its subdirectories.
+     *
+     * @param pathString relative path of a directory
+     * @return {@link Stream} of relative file paths
+     */
+    Stream<String> walkFiles(String pathString);
 }

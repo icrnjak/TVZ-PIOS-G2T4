@@ -9,13 +9,16 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.nio.file.Path;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Contains methods for working with monthly reports.
@@ -109,6 +112,46 @@ public class MonthlyReportService {
      */
     public Resource get(Long walletId) {
         return get(getPreviousMonth(), walletId);
+    }
+
+    /**
+     * Deletes a monthly report at a given relative path.
+     * <p>
+     * It is made to be easily used with {@link #walkFiles()}.
+     * </p>
+     *
+     * @param reportPath relative path of a monthly report
+     * @return {@code true} if it was deleted successfully, {@code false} otherwise
+     * @throws IllegalArgumentException if a given path to a report file is not valid
+     */
+    public boolean delete(String reportPath) {
+        if (!isValidFilePath(reportPath)) {
+            throw new IllegalArgumentException("Invalid monthly report file path: " + reportPath);
+        }
+        return fileManagerService.delete(reportPath);
+    }
+
+    /**
+     * Returns a stream containing all monthly report files.
+     *
+     * @return {@link Stream} containing monthly reports
+     */
+    public Stream<String> walkFiles() {
+        return fileManagerService.walkFiles(MONTHLY_REPORT_FOLDER);
+    }
+
+    private boolean isValidFilePath(String path) {
+        if (!StringUtils.hasText(path)) {
+            return false;
+        }
+        try {
+            String[] filenameSplit = Path.of(path).getFileName().toString().split("-");
+            Long walletId = Long.valueOf(filenameSplit[2]);
+            YearMonth yearMonth = YearMonth.parse(filenameSplit[3] + "-" + filenameSplit[4].substring(0, 2));
+            return path.equals(generateFilePath(yearMonth, walletId));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private String generateFilePath(YearMonth yearMonth, Long walletId) {
