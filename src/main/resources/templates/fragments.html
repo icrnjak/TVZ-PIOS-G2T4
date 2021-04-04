@@ -50,7 +50,7 @@
 			   th:text="#{msg.nav.logout}">Odjava</a>
 		</li>
 
-		<li class="nav-item" th:if="${false}">
+		<li class="nav-item">
 			<label for="locales" style="display: none;">Jezik</label>
 			<select id="locales">
 				<option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang.hr}"></option>
@@ -71,5 +71,22 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </div>
 
+<div th:fragment="scripts">
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#locales").change(function () {
+				var selectedOption = $('#locales').val();
+				if (selectedOption != ''){
+					window.location.replace('?language=' + selectedOption);
+				}
+			});
+		});
+
+	</script>
+</div>
+
 </body>
+
 </html>
