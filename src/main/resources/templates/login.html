@@ -33,12 +33,22 @@
         </div>
 
         <div class="form-group">
+            <label th:text="#{msg.language}">Jezik:</label>
+            <select id="locales">
+                <option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang.hr}"></option>
+                <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{msg.lang.en}"></option>
+                <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{msg.lang.fr}"></option>
+                <option value="de" th:selected="${#locale.language == 'de'}" th:text="#{msg.lang.de}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             <button class="btn btn-info btn-block" type="submit" th:text="#{msg.login}">Login</button>
         </div>
         <div class="form-group text-center">
-            <p>Nemate račun?</p>
-            <a th:href="@{/registration}">Registrirajte se</a>
+            <p th:text="#{msg.noAccount}"></p>
+            <a th:href="@{/registration}" th:text="#{msg.registration}"></a>
         </div>
 
     </form>
