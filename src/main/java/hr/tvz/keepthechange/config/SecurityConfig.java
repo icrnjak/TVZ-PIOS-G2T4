@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http
                 .authorizeRequests()
-                .mvcMatchers("/login", "/assets/**", "/h2-console/**", "/error").permitAll()
+                .mvcMatchers("/login", "/registration", "/assets/**", "/h2-console/**", "/error").permitAll()
                 .mvcMatchers("/allExpenses", "/administration/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated();
         http
