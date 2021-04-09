@@ -8,6 +8,7 @@ import hr.tvz.keepthechange.enumeration.TransactionType;
 import hr.tvz.keepthechange.repository.TransactionRepository;
 import hr.tvz.keepthechange.repository.WalletRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -139,5 +140,16 @@ public class TransactionService {
                         ? t.getValue().multiply(BigDecimal.valueOf(-1L))
                         : t.getValue())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    /**
+     * Deletes all transactions of a wallet with the given ID.
+     *
+     * @param walletId id of a wallet whose transactions we're deleting
+     * @return number of deleted transactions
+     */
+    @Transactional
+    public int deleteAllByWalletId(Long walletId) {
+        return transactionRepository.deleteAllByWalletId(walletId);
     }
 }

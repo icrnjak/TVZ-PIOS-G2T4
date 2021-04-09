@@ -17,6 +17,7 @@
                 <th th:text="#{msg.search.date}"> Datum</th>
                 <th th:text="#{msg.owner}"> Vlasnik </th>
                 <th th:text="#{msg.id}"> ID </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +29,11 @@
                 <td><span th:text="${{wallet.createDate}}"> Datum </span></td>
                 <td><span th:text="${wallet.username}"> Vlasnik </span></td>
                 <td><span th:text="${wallet.id}"> ID </span></td>
+                <td style="padding: 5px;">
+                    <a th:href="@{/administration/resetWallet/{id}(id = ${wallet.id})}"
+                       th:title="#{msg.administration.resetWallet}"
+                       class="btn btn-warning btn-block"><i class="fa fa-recycle"></i></a>
+                </td>
             </tr>
             </tbody>
         </table>
