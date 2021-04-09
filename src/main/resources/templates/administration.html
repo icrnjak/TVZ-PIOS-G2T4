@@ -18,6 +18,7 @@
                 <th th:text="#{msg.owner}"> Vlasnik </th>
                 <th th:text="#{msg.id}"> ID </th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,11 @@
                     <a th:href="@{/administration/resetWallet/{id}(id = ${wallet.id})}"
                        th:title="#{msg.administration.resetWallet}"
                        class="btn btn-warning btn-block"><i class="fa fa-recycle"></i></a>
+                </td>
+                <td style="padding: 5px;">
+                    <a th:href="@{/administration/deleteWallet/{id}(id = ${wallet.id})}"
+                       th:title="#{msg.administration.deleteWallet}"
+                       class="btn btn-danger btn-block"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
             </tbody>

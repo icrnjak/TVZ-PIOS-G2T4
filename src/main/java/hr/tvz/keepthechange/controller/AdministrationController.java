@@ -44,4 +44,12 @@ public class AdministrationController {
         LOGGER.debug("Deleted {} transactions for wallet with ID = {}", deletedCount, id);
         return "redirect:/administration";
     }
+
+    @GetMapping("/deleteWallet/{id}")
+    public String deleteWallet(@PathVariable Long id) {
+        LOGGER.info("Deleting wallet with ID = {}", id);
+        int deletedCount = walletService.deleteById(id);
+        LOGGER.debug("Deleted {} wallets with ID = {}", deletedCount, id);
+        return "redirect:/administration";
+    }
 }
