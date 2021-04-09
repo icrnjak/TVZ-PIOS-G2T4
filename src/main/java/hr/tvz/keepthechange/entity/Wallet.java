@@ -26,8 +26,7 @@ public class Wallet {
     @Column(name="username")
     private String username;
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Transaction.class, fetch = FetchType.LAZY)
-    @JoinTable(name="transaction", joinColumns = @JoinColumn(name="walletid"))
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 
     public Long getId() {

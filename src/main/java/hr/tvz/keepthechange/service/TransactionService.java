@@ -48,9 +48,7 @@ public class TransactionService {
         transaction.setTransactionCategory(transactionDto.getTransactionCategory());
         transaction.setId(transactionDto.getId());
 
-        Wallet wallet = getWallet();
-
-		transaction.setWalletId(wallet.getId());
+        transaction.setWallet(getWallet());
 
 		return  transactionRepository.save(transaction);
 	}
