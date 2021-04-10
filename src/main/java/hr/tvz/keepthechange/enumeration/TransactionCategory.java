@@ -4,13 +4,13 @@ package hr.tvz.keepthechange.enumeration;
  * TransactionCategory enumeration.
  */
 public enum TransactionCategory {
-	HEALTH("Zdravlje"),
-	FUN("Zabava"),
-	SHOPPING("Kupovina"),
-	GROCERIES("Namirnice"),
-	UTILITY("Komunalne usluge"),
-	GENERAL("Općenito"),
-	TRANSPORT("Prijevoz");
+	HEALTH("Health"),
+	FUN("Fun"),
+	SHOPPING("Shopping"),
+	GROCERIES("Groceries"),
+	UTILITY("Utility"),
+	GENERAL("General"),
+	TRANSPORT("Transport");
 
 	public String desc;
 

@@ -59,10 +59,10 @@
                     th:classappend="${isExpense} ? red : green">
                     <td><span th:text="${t.name}"> Naziv </span></td>
                     <td><span th:text="${(isExpense ? '-' : '') + t.value}"> Iznos </span></td>
-                    <td><span th:text="${t.transactionCategory.desc}"> Kategorija </span></td>
+                    <td><span th:text="#{'msg.transactionCategory.'+${t.transactionCategory.desc}}"> Kategorija </span></td>
                     <td><span th:text="${{t.date}}"> Datum </span></td>
                     <td><span th:text="${t.walletId}"> Id novčanika </span></td>
-                    <td><span th:text="${t.transactionType.desc}"> Vrsta </span></td>
+                    <td><span th:text="#{'msg.transactionType.'+${t.transactionType.desc}}"> Vrsta </span></td>
                 </tr>
 
                 </tbody>

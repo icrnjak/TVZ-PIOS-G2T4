@@ -28,7 +28,7 @@
 					<option value="" th:text="#{msg.list.default}">---Odaberite vrijednost---</option>
 					<option th:each="transactionType : ${type}"
 							th:value="${transactionType}"
-							th:text="${transactionType.desc}"
+							th:text="#{'msg.transactionType.'+${transactionType.desc}}"
 							th:selected="${transactionType}"></option>
 				</select>
 				<span calss="validation-error" style="color: red;" th:if="${#fields.hasErrors('transactionType')}" th:errors="*{transactionType}"></span>
@@ -41,7 +41,7 @@
 					<option value="" th:text="#{msg.list.default}">---Odaberite vrijednost---</option>
 					<option th:each="transactionCategory : ${category}"
 							th:value="${transactionCategory}"
-							th:text="${transactionCategory.desc}"
+							th:text="#{'msg.transactionCategory.'+${transactionCategory.desc}}"
 							th:selected="${transactionCategory}"></option>
 				</select>
 				<span calss="validation-error" style="color: red;" th:if="${#fields.hasErrors('transactionCategory')}" th:errors="*{transactionCategory}"></span>
