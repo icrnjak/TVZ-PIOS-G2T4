@@ -75,6 +75,19 @@ public class UserService {
     }
 
     /**
+     * Disables users account given by an username.
+     *
+     * @param username username of an user whose account is to be deleted
+     */
+    public void disableUserByUsername(String username) {
+        userRepository.findByUsername(username)
+                .ifPresent(user -> {
+                    user.setEnabled(false);
+                    userRepository.save(user);
+                });
+    }
+
+    /**
      * Creates {@link Authority} for {@link User}.
      * @param userDto user data which we are inserting into a database
      */

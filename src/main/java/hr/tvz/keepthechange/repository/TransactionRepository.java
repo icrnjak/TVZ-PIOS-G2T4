@@ -20,4 +20,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
 	List<Transaction> findByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory);
 	List<Transaction> findByWalletIdAndDate(Long id, Date date);
 	List<Transaction> findByDateBetween(Date from, Date to);
+
+	int deleteAllByWalletId(Long walletId);
 }

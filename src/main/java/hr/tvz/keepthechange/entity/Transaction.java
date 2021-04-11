@@ -32,8 +32,12 @@ public class Transaction {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @Column(name="wallet_id")
+    @Column(name="wallet_id", updatable = false, insertable = false)
     private Long walletId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "wallet_id", nullable = false)
+    private Wallet wallet;
 
     @Column(name="transaction_type")
     @Enumerated(EnumType.STRING)
@@ -93,6 +97,14 @@ public class Transaction {
 
     public void setTransactionType(TransactionType type) {
         this.transactionType = type;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     @Override
