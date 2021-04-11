@@ -42,6 +42,7 @@ public class HomeScreenTest {
 			.andExpect(model().attributeExists("walletStatus"))
 			.andExpect(model().attributeExists("transactionCategories"))
 			.andExpect(model().attributeExists("transactions"))
+			.andExpect(model().attributeExists("monthlyReportExists"))
 			.andExpect(view().name("index"));
 	}
 		
