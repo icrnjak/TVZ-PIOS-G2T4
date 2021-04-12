@@ -28,7 +28,11 @@ public class TransactionTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-		
+
+	/**
+	 * Test for transaction form.
+	 * @throws Exception exception
+	 */
 	@Test
 	public void testGetMethod() throws Exception {
 		this.mockMvc
@@ -40,7 +44,11 @@ public class TransactionTest {
             .andExpect(model().attributeExists("category"))
 			.andExpect(view().name("transaction"));
 	}
-	
+
+	/**
+	 * Test creating new income transaction.
+	 * @throws Exception exception
+	 */
 	@Test
 	public void testPostMethodTransaction() throws Exception {
 		
@@ -64,7 +72,11 @@ public class TransactionTest {
 			.andExpect(view().name("transactionInfo"));
             
 	}
-	
+
+	/**
+	 * Test creating new expense.
+	 * @throws Exception exception.
+	 */
     @Test
 	public void testPostMethodExpense() throws Exception {
 		
@@ -88,6 +100,10 @@ public class TransactionTest {
 			.andExpect(view().name("transactionInfo"));
 	}
 
+	/**
+	 * Test transaction edit.
+	 * @throws Exception exception
+	 */
 	@Test
 	public void testTransactionEdit() throws Exception {
 		//Create new Transaction
@@ -104,6 +120,10 @@ public class TransactionTest {
 				.andExpect(view().name("transaction"));
 	}
 
+	/**
+	 * Test transaction delete.
+	 * @throws Exception exception.
+	 */
 	@Test
 	public void testTransactionDelete() throws Exception {
 		final Transaction transaction = getNewTransaction();

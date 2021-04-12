@@ -3,27 +3,21 @@ package hr.tvz.keepthechange;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import javax.persistence.Index;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import hr.tvz.keepthechange.controller.IndexController;
-import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.enumeration.TransactionCategory;
-import hr.tvz.keepthechange.enumeration.TransactionType;
-import hr.tvz.keepthechange.service.TransactionService;
 
-
+/**
+ * Home screen test class.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class HomeScreenTest {
@@ -32,7 +26,10 @@ public class HomeScreenTest {
 	private MockMvc mockMvc;
 
 
-
+	/**
+	 * Test home screen content loading.
+	 * @throws Exception exception.
+	 */
 	@Test
 	public void testGetMethod() throws Exception {
 		this.mockMvc
@@ -45,7 +42,11 @@ public class HomeScreenTest {
 			.andExpect(model().attributeExists("monthlyReportExists"))
 			.andExpect(view().name("index"));
 	}
-		
+
+	/**
+	 * Test transaction filter by name.
+	 * @throws Exception exception
+	 */
 	@Test
 	public void testFilterName() throws Exception{
 		
@@ -59,7 +60,10 @@ public class HomeScreenTest {
 			.andExpect(view().name("index"));
 	}
 
-
+	/**
+	 * Test transaction filter by category.
+	 * @throws Exception exception.
+	 */
 	@Test
 	public void testFilterCategory() throws Exception{
 		
@@ -74,6 +78,10 @@ public class HomeScreenTest {
 		
 	}
 
+	/**
+	 * Test transaction filter by date.
+	 * @throws Exception exception.
+	 */
 	@Test
 	public void testFilterDate() throws Exception{
 		

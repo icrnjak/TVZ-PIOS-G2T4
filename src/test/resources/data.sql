@@ -1,3 +1,4 @@
+delete from transaction;
 delete from wallet;
 delete from authorities;
 delete from users;
