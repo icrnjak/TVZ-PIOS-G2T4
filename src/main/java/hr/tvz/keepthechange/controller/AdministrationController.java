@@ -1,5 +1,6 @@
 package hr.tvz.keepthechange.controller;
 
+import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.service.TransactionService;
 import hr.tvz.keepthechange.service.WalletService;
@@ -29,6 +30,11 @@ public class AdministrationController {
         this.transactionService = transactionService;
     }
 
+    /**
+     * Shows the "all expenses" view which contains all wallets and expenses.
+     * @param model template model
+     * @return view name
+     */
     @GetMapping
     public String showAdminPage(Model model) {
         LOGGER.debug("Showing admin page");
@@ -37,6 +43,11 @@ public class AdministrationController {
         return VIEW_NAME;
     }
 
+    /**
+     * Delete all {@link Transaction} objects for {@link Wallet} with specified ID
+     * @param id {@link Wallet} id
+     * @return view name
+     */
     @GetMapping("/resetWallet/{id}")
     public String resetWallet(@PathVariable Long id) {
         LOGGER.info("Resetting wallet with ID = {}", id);
@@ -45,6 +56,11 @@ public class AdministrationController {
         return "redirect:/administration";
     }
 
+    /**
+     * Delete {@link Wallet} with specified ID
+     * @param id {@link Wallet} id
+     * @return view name
+     */
     @GetMapping("/deleteWallet/{id}")
     public String deleteWallet(@PathVariable Long id) {
         LOGGER.info("Deleting wallet with ID = {}", id);

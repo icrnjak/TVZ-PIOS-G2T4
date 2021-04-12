@@ -21,6 +21,11 @@ import java.util.Locale;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    /**
+     * Allows for keeping locale during session
+     * @return session locale resolver
+     */
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
@@ -29,6 +34,10 @@ public class WebConfig implements WebMvcConfigurer {
         return localeResolver;
     }
 
+    /**
+     * Map the path to message source inside the project
+     * @return path to message source
+     */
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -37,11 +46,20 @@ public class WebConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
+    /**
+     * Helper class for easy access to {@link MessageSource}
+     * @param messageSource {@link MessageSource}
+     * @return message source accessor
+     */
     @Bean
     public MessageSourceAccessor messageSourceAccessor(MessageSource messageSource) {
         return new MessageSourceAccessor(messageSource);
     }
 
+    /**
+     * Central class for validation
+     * @return local validator
+     */
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
@@ -49,6 +67,10 @@ public class WebConfig implements WebMvcConfigurer {
         return bean;
     }
 
+    /**
+     * Save new locale throughout the session
+     * @return locale change interceptor
+     */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
@@ -56,6 +78,10 @@ public class WebConfig implements WebMvcConfigurer {
         return lci;
     }
 
+    /**
+     * Configures date format inside of the application
+     * @return date format
+     */
     @Bean
     public DateFormatter dateFormatter() {
         return new DateFormatter("dd.MM.yyyy.");

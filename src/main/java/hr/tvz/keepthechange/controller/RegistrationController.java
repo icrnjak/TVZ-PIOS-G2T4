@@ -38,6 +38,11 @@ public class RegistrationController {
         binder.addValidators(userRegistrationValidator);
     }
 
+    /**
+     * Get view for registration page and bind {@link UserRegistrationDto}
+     * @param model template model
+     * @return view name
+     */
     @GetMapping
     public String showRegistrationPage(Model model) {
         model.addAttribute(USER_REGISTRATION_DTO, new UserRegistrationDto());
