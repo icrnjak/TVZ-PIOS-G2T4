@@ -49,10 +49,9 @@ public class TransactionController {
 			return "transaction";
 		} else {
 
-			model.addAttribute("transaction", transactionService.saveTransaction(transactionDto));
-			model.addAttribute("wallet", walletService.calculateWallet());
+			transactionService.saveTransaction(transactionDto);
 			LOGGER.info("Transaction " + transactionDto.getName() + " saved to database");
-			return "transactionInfo";
+			return "redirect:/index";
 		}
 	}
 

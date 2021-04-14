@@ -9,7 +9,7 @@ html{
 
 body{
     height: 100%;
-    background-color: #f1f7fc;
+    background-color: #f1f7fc !important;
 }
 
 select{
