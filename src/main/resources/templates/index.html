@@ -29,7 +29,7 @@
                     <option value="" th:text="#{msg.list.default}">---Odaberite vrijednost---</option>
                     <option th:each="category : ${transactionCategories}"
                             th:value="${category}"
-                            th:text="${category.desc}"></option>
+                            th:text="#{'msg.transactionCategory.'+${category.desc}}"></option>
                 </select>
                 <input class="form-control lime-border" type="date" name="date" id="date"
                        data-date-format="YYYY-MM-DD" disabled hidden required>
@@ -55,7 +55,7 @@
             <tr>
                 <th th:text="#{msg.search.name}"> Naziv</th>
                 <th th:text="#{msg.price}"> Iznos</th>
-                <th th:text="#{msg.search.type}"> Vrsta</th>
+                <th th:text="#{msg.search.category}"> Kategorija</th>
                 <th th:text="#{msg.search.date}"> Datum</th>
                 <th></th>
                 <th></th>
@@ -70,7 +70,7 @@
                 th:classappend="${isExpense} ? red : green">
                 <td style="padding: 5px;"><span th:text="${t.name}"> Naziv </span></td>
                 <td><span th:text="${isExpense} ? '-' + ${t.value} : ${t.value}"> Iznos </span></td>
-                <td><span th:text="${t.transactionCategory.desc}"> Vrsta </span></td>
+                <td><span th:text="#{'msg.transactionCategory.'+${t.transactionCategory.desc}}"> Vrsta </span></td>
                 <td><span th:text="${{t.date}}"> Datum </span></td>
                 <td style="padding: 5px;">
                     <a th:href="@{transaction/{id}(id = ${t.id})}" href="#"

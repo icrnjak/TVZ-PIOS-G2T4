@@ -4,8 +4,8 @@ package hr.tvz.keepthechange.enumeration;
  * TransactionType enumeration
  */
 public enum TransactionType {
-	EXPENSE("Trošak"),
-	INCOME("Uplata");
+	EXPENSE("Expense"),
+	INCOME("Income");
 
 	public String desc;
 
