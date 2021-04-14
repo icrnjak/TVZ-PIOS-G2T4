@@ -30,6 +30,8 @@ public class AllExpensesController {
 
     /**
      * Shows the "all expenses" view which contains all wallets and expenses.
+     * @param model template model
+     * @return view name
      */
     @GetMapping
     public String showAllExpensesPage(Model model) {

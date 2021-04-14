@@ -1,5 +1,6 @@
 package hr.tvz.keepthechange.controller;
 
+import hr.tvz.keepthechange.entity.Transaction;
 import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.service.MonthlyReportService;
 import hr.tvz.keepthechange.service.WalletService;
@@ -31,6 +32,11 @@ public class MonthlyReportController {
         this.walletService = walletService;
     }
 
+    /**
+     * Get all {@link Transaction} from {@link Wallet} for current month and download it
+     * @param principal interface representing index model
+     * @return ResponseEntity
+     */
     @SuppressWarnings("ConstantConditions")
     @GetMapping
     public ResponseEntity<Resource> downloadMonthlyReport(Principal principal) {

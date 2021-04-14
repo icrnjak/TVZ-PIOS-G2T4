@@ -49,6 +49,10 @@ public class IndexController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), false));
     }
 
+    /**
+     * Add attributes to index template model
+     * @param model template model
+     */
     @ModelAttribute
     public void addModelAttributes(Model model) {
         LOGGER.debug("Adding wallet status, wallet existence and transaction categories to model");
@@ -58,6 +62,12 @@ public class IndexController {
         model.addAttribute("monthlyReportExists", monthlyReportService.exists(walletDto.getId()));
     }
 
+    /**
+     * Get index view page
+     * @param model template model
+     * @param principal interface representing index model
+     * @return view name
+     */
     @GetMapping
     public String showIndex(Model model, Principal principal) {
         LOGGER.debug("Showing index page");
@@ -67,6 +77,13 @@ public class IndexController {
         return VIEW_NAME;
     }
 
+    /**
+     * Return list of {@link Transaction} containing {@param name} substring
+     * @param name {@link Transaction} name
+     * @param model template model
+     * @param principal interface representing index model
+     * @return view name
+     */
     @GetMapping(params = NAME_PARAM)
     public String searchByName(@RequestParam(NAME_PARAM) String name,
                                Model model,
@@ -79,6 +96,13 @@ public class IndexController {
         return VIEW_NAME;
     }
 
+    /**
+     * Return list of {@link Transaction} containing {@param category} as {@link TransactionCategory} enum
+     * @param category {@link Transaction} transactionCategory
+     * @param model template model
+     * @param principal interface representing index model
+     * @return view name
+     */
     @GetMapping(params = CATEGORY_PARAM)
     public String searchByName(@RequestParam(CATEGORY_PARAM) TransactionCategory category,
                                Model model,
@@ -91,6 +115,13 @@ public class IndexController {
         return VIEW_NAME;
     }
 
+    /**
+     * Return list of {@link Transaction} created on date {@param date}
+     * @param date date of {@link Transaction} creation
+     * @param model template model
+     * @param principal interface representing index model
+     * @return view name
+     */
     @GetMapping(params = DATE_PARAM)
     public String searchByName(@RequestParam(DATE_PARAM) Date date,
                                Model model,

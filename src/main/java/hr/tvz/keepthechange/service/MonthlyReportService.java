@@ -1,6 +1,7 @@
 package hr.tvz.keepthechange.service;
 
 import hr.tvz.keepthechange.entity.Transaction;
+import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.util.JxlsUtil;
 import org.jxls.common.Context;
 import org.slf4j.Logger;
@@ -140,6 +141,11 @@ public class MonthlyReportService {
         return fileManagerService.walkFiles(MONTHLY_REPORT_FOLDER);
     }
 
+    /**
+     * Check if the filepath is valid
+     * @param path string of file path
+     * @return boolean
+     */
     private boolean isValidFilePath(String path) {
         if (!StringUtils.hasText(path)) {
             return false;
@@ -154,6 +160,12 @@ public class MonthlyReportService {
         }
     }
 
+    /**
+     * Generate a file path where monthly report file will be located
+     * @param yearMonth month of report
+     * @param walletId {@link Wallet} ID
+     * @return file path
+     */
     private String generateFilePath(YearMonth yearMonth, Long walletId) {
         return MONTHLY_REPORT_FOLDER +
                 "/" +
@@ -162,11 +174,21 @@ public class MonthlyReportService {
                 generateFilename(yearMonth, walletId);
     }
 
+    /**
+     * Generate file name of monthly report
+     * @param yearMonth month of report
+     * @param walletId {@link Wallet} ID
+     * @return file name
+     */
     private String generateFilename(YearMonth yearMonth, Long walletId) {
         return MONTHLY_REPORT_FILENAME_PATTERN.replace("{walletId}", walletId.toString())
                 .replace("{yearMonth}", yearMonth.toString());
     }
 
+    /**
+     * Fetch previous month to use for montly report
+     * @return month
+     */
     private YearMonth getPreviousMonth() {
         return YearMonth.now().minusMonths(1);
     }

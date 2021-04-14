@@ -2,6 +2,7 @@ package hr.tvz.keepthechange.service;
 
 import hr.tvz.keepthechange.dto.WalletDto;
 import hr.tvz.keepthechange.entity.Transaction;
+import hr.tvz.keepthechange.entity.User;
 import hr.tvz.keepthechange.entity.Wallet;
 import hr.tvz.keepthechange.enumeration.TransactionType;
 import hr.tvz.keepthechange.repository.TransactionRepository;
@@ -51,10 +52,19 @@ public class WalletService {
         return walletDto;
     }
 
+    /**
+     * Find {@link Wallet} by username
+     * @param username {@link User} username
+     * @return {@link Wallet} by username
+     */
     public Optional<Wallet> findFirstByUsername(String username) {
         return walletRepository.findFirstByUsername(username);
     }
 
+    /**
+     * Get all {@link Wallet} objects sorted by name
+     * @return list of {@link Wallet} sorted by name
+     */
     public List<Wallet> findAllOrderByWalletName(){
         return walletRepository.findAllByOrderByWalletName();
     }

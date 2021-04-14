@@ -97,22 +97,50 @@ public class TransactionService {
         return walletRepository.findByUsername(userService.getLoggedInUser()).get(0);
     }
 
+    /**
+     * Get all {@link Transaction} objects from user's wallet by date
+     * @param walletId {@link Wallet} id.
+     * @return {@link Transaction} object
+     */
     public List<Transaction> getAllByWalletIdOrderByDateDesc(Long walletId) {
         return transactionRepository.findByWalletIdOrderByDateDesc(walletId);
     }
 
+    /**
+     * Get all {@link Transaction} objects from user's wallet containing substring in wallet name
+     * @param id {@link Wallet} id.
+     * @param name {@link Transaction} name
+     * @return list of {@link Transaction} objects
+     */
     public List<Transaction> getAllByWalletIdAndNameContainsIgnoreCase(Long id, String name) {
         return transactionRepository.findByWalletIdAndNameContainsIgnoreCase(id, name);
     }
 
+    /**
+     * Get all {@link Transaction} objects from user's wallet with specified category
+     * @param id {@link Wallet} id.
+     * @param transactionCategory {@link TransactionCategory} enum
+     * @return list of {@link Transaction} objects
+     */
     public List<Transaction> getAllByWalletIdAndTransactionCategory(Long id, TransactionCategory transactionCategory) {
         return transactionRepository.findByWalletIdAndTransactionCategory(id, transactionCategory);
     }
 
+    /**
+     * Get all {@link Transaction} objects from user's wallet created on a specific date
+     * @param id {@link Wallet} id.
+     * @param date {@link Transaction} date
+     * @return list of {@link Transaction} objects
+     */
     public List<Transaction> getAllByWalletIdAndDate(Long id, Date date) {
         return transactionRepository.findByWalletIdAndDate(id, date);
     }
 
+    /**
+     * Returns all {@link Transaction} objects for specified year and month
+     * @param yearMonth year and month
+     * @return list of {@link Transaction} objects
+     */
     public List<Transaction> getAllByYearMonth(YearMonth yearMonth) {
         Date from = Date.from(yearMonth.atDay(1)
                 .atStartOfDay()
