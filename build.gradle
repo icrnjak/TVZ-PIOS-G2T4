@@ -13,6 +13,18 @@ repositories {
 }
 
 dependencies {
+    
+     //testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java',
+            version: '3.141.59'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '5.6.0'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '5.6.0'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+    testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -31,4 +43,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    useTestNG()
 }
